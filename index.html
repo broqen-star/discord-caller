@@ -29,6 +29,11 @@
         document.getElementById("place").value = params.get("place");
       });
     }
+    if (params.get("comment")) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("comment").value = params.get("comment");
+      });
+    }
 
     const webhookUrl = "https://discord.com/api/webhooks/1389842144516116540/iZwLzydi_2Bveh1jOJ0S_yzE-Q7EViIOtTb_ie5XVmt0V-KWm0O0f9nIvcbiYkTQeQQ-";
 
@@ -36,9 +41,10 @@
       e.preventDefault();
       const sender = document.getElementById('sender').value;
       const place = document.getElementById('place').value;
+      const comment = document.getElementById('comment').value;
 
       const content = {
-        content: `📣 **呼び出し通知**\n連絡者: ${sender}\n場所: ${place}`
+        content: `📣 **呼び出し通知**\n連絡者: ${sender}\n場所: ${place}\nコメント: ${comment}`
       };
 
       try {
