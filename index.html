@@ -2,19 +2,85 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>呼び出しシステム</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      margin: 0;
+      background: #f9f9f9;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 1em;
+      font-size: 1em;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.7em;
+      font-size: 1em;
+      margin-top: 0.3em;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8em;
+      font-size: 1.1em;
+      background-color: #2d89ef;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1b6fd2;
+    }
+
+    p {
+      text-align: center;
+      font-size: 0.95em;
+      color: #555;
+      margin-top: 2em;
+    }
+  </style>
 </head>
 
 <body>
   <h1>📨 呼び出しシステム</h1>
   <form id="callForm">
-    <label>連絡者: <input type="text" id="sender" required></label><br>
-    <label>場所: <input type="text" id="place"></label><br>
-    <label>コメント: <input type="text" id="comment"></label><br>    
-    <button type="submit">送信📨</button>
+    <label>連絡者
+      <input type="text" id="sender" required>
+    </label>
+    <label>場所
+      <input type="text" id="place">
+    </label>
+    <label>コメント
+      <input type="text" id="comment">
+    </label>
+    <button type="submit">送信 📨</button>
   </form>
 
-  <p>スマホに通知が飛びます。<br>呼び出すときに使って下さい。<br>医事課 千葉</p>
+  <p>スマホに通知が飛びます。呼び出すときに使ってください。</p>
 
   <script>
     // URLクエリから値を自動入力
@@ -44,7 +110,17 @@
       const comment = document.getElementById('comment').value;
 
       const content = {
-        content: `📣 **呼び出し通知**\n連絡者: ${sender}\n場所: ${place}\nコメント: ${comment}`
+        embeds: [{
+          title: "📣 通知",
+          color: 0x2D89EF,
+          description: "Webから連絡がありました",
+          fields: [
+            { name: "＜連絡者＞", value: sender || "未入力" },
+            { name: "＜場所＞", value: place || "" },
+            { name: "＜コメント＞", value: comment || "" }
+          ],
+          timestamp: new Date().toISOString()
+        }]
       };
 
       try {
