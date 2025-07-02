@@ -2,11 +2,20 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>呼び出し通知</title>
+  <title>呼び出しシステム</title>
 </head>
+
 <body>
-  <h1>📨 呼び出し通知</h1>
-  
+  <h1>📨 呼び出しシステム</h1>
+  <form id="callForm">
+    <label>連絡者: <input type="text" id="sender" required></label><br>
+    <label>場所: <input type="text" id="place"></label><br>
+    <label>コメント: <input type="text" id="comment"></label><br>    
+    <button type="submit">送信📨</button>
+  </form>
+
+  <p>スマホに通知が飛びます。<br>呼び出すときに使って下さい。<br>医事課 千葉</p>
+
   <script>
     // URLクエリから値を自動入力
     const params = new URLSearchParams(window.location.search);
@@ -20,15 +29,7 @@
         document.getElementById("place").value = params.get("place");
       });
     }
-  </script>
 
-  <form id="callForm">
-    <label>連絡者: <input type="text" id="sender" required></label><br>
-    <label>場所: <input type="text" id="place" required></label><br>
-    <button type="submit">Discordに通知</button>
-  </form>
-
-  <script>
     const webhookUrl = "https://discord.com/api/webhooks/1389842144516116540/iZwLzydi_2Bveh1jOJ0S_yzE-Q7EViIOtTb_ie5XVmt0V-KWm0O0f9nIvcbiYkTQeQQ-";
 
     document.getElementById('callForm').addEventListener('submit', async (e) => {
