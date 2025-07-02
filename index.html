@@ -6,6 +6,22 @@
 </head>
 <body>
   <h1>📨 呼び出し通知</h1>
+  
+  <script>
+    // URLクエリから値を自動入力
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("sender")) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("sender").value = params.get("sender");
+      });
+    }
+    if (params.get("place")) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("place").value = params.get("place");
+      });
+    }
+  </script>
+
   <form id="callForm">
     <label>連絡者: <input type="text" id="sender" required></label><br>
     <label>場所: <input type="text" id="place" required></label><br>
