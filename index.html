@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>呼び出し通知</title>
+</head>
+<body>
+  <h1>📨 呼び出し通知</h1>
+  <form id="callForm">
+    <label>連絡者: <input type="text" id="sender" required></label><br>
+    <label>場所: <input type="text" id="place" required></label><br>
+    <button type="submit">Discordに通知</button>
+  </form>
+
+  <script>
+    const webhookUrl = "https://discord.com/api/webhooks/1389842144516116540/iZwLzydi_2Bveh1jOJ0S_yzE-Q7EViIOtTb_ie5XVmt0V-KWm0O0f9nIvcbiYkTQeQQ-";
+
+    document.getElementById('callForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const sender = document.getElementById('sender').value;
+      const place = document.getElementById('place').value;
+
+      const content = {
+        content: `📣 **呼び出し通知**\n連絡者: ${sender}\n場所: ${place}`
+      };
+
+      try {
+        const res = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(content)
+        });
+
+        if (res.ok) {
+          alert("Discordに通知しました");
+          e.target.reset();
+        } else {
+          alert("通知に失敗しました");
+        }
+      } catch (err) {
+        alert("通知エラー");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
